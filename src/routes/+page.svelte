@@ -26,15 +26,6 @@
 </div>
 
 <style>
-
-    .icon {
-        transition: all 0.5s linear;
-    }
-    .icon:hover {
-        filter: none;
-        scale: 1.1;
-        transition: all 0.5s linear;
-    }
 	@keyframes fadeout {
 		0% {
 			opacity: 1;
@@ -54,7 +45,7 @@
 	}
 	.background-text:hover {
 		animation: none;
-        color: black;
+		color: black;
 		opacity: 1;
 		transform: scale(1.05);
 		transition: all 0.5s linear;
@@ -62,16 +53,16 @@
 	.icon-container {
 		position: absolute;
 		top: 88%;
-		font-size: 1.5rem;
+		font-size: 2rem;
 	}
-
-	/* @media screen and (max-width: 401px) {
-		.background-text {
-            position: absolute;
-            top: 35%;
-			font-size: 7vw;
-		}
-	} */
+	.icon {
+		transition: all 0.5s linear;
+	}
+	.icon:hover {
+		filter: none;
+		scale: 1.1;
+		transition: all 0.5s linear;
+	}
 
 	@media screen and (min-width: 400px) {
 		.background-text {
