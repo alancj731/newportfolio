@@ -1,17 +1,29 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	let cardRef: HTMLElement | null = null;
+	export let topInitOffset: string ;
+	export let leftInitOffset: string ;
+	
+	let pathoffset: string;
 
 	$: cardWidth = 0;
 	$: cardHeight = 0;
 	$: cardTop = 0;
 	$: cardLeft = 0;
+	$: pathoffset = '';
+
 
 	function updateCardContainerSizeAndPosition() {
+		console.log('updateCardContainerSizeAndPosition topInitOffset:', topInitOffset);
 		const windowWidth = window.innerWidth;
 		const windowHeight = window.innerHeight;
 		const deviceWidth = screen.width;
 		const deviceHeight = screen.height;
+		const topOffsetUnit = Math.floor(windowHeight * 0.01);
+		const leftOffsetUnit = Math.floor(windowWidth * 0.01);
+		const topOffset = Number(topInitOffset) * topOffsetUnit;
+		const leftOffset = Number(leftInitOffset) * leftOffsetUnit;
+
 
 		cardWidth =
 			windowWidth >= 3800
@@ -27,16 +39,33 @@
 								: windowWidth >= 400
 									? 320
 									: 260;
-		cardHeight = Math.min(cardWidth * 1.5, Math.floor(windowHeight * 0.9));
+		cardHeight = Math.min(cardWidth * 1.618, Math.floor(windowHeight * 0.9));
 
 		cardTop =
 			windowHeight > cardHeight
 				? Math.floor((windowHeight - cardHeight) / 2)
-				: Math.floor((deviceHeight - cardHeight) / 2);
+				: Math.floor((deviceHeight - cardHeight) / 2) 
+		cardTop += topOffset;
+
 		cardLeft =
 			windowWidth > cardWidth
 				? Math.floor((windowWidth - cardWidth) / 2)
 				: Math.floor((deviceWidth - cardWidth) / 2);
+
+		cardLeft = cardLeft + leftOffset;
+
+		pathoffset = `path('M 0 0 L ${-leftOffset} ${-topOffset}')`
+		console.log('pathoffset:', pathoffset)
+	}
+
+	function rerunAnimation(){
+		if (!cardRef) {
+			console.error('cardRef is null');
+			return;
+		}
+		cardRef.style.animation = 'none';
+		cardRef.offsetHeight; /* trigger reflow */
+		cardRef.style.animation = '';
 	}
 
 	function enableDraggability() {
@@ -109,6 +138,7 @@
 		// add event listener for window resize
 		window.addEventListener('resize', () => {
 			updateCardContainerSizeAndPosition();
+			rerunAnimation();
 		});
 
 		// enable draggability
@@ -117,8 +147,9 @@
 </script>
 
 <div
-	class="card-container hidden bg-sky-900"
-	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px"
+	class="card-container hidden rounded-[55px] bg-cardbg"
+	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px ; 
+	offset-path: {pathoffset};"
 	bind:this={cardRef}
 >
 	<div class="card">
@@ -127,41 +158,21 @@
 </div>
 
 <style>
+	.card-container:hover {
+		cursor: grab;
+	}
+
 	.card-container {
 		position: absolute;
-		opacity: 0.8;
+		opacity: 1;
+		z-index: 300;
+		offset-anchor: top left;
+		offset-distance: 0%;
+		offset-rotate: 0deg;
+		animation: moveContainer 1s cubic-bezier(0, 0, 0.5, 0.5) forwards;
+		animation-delay: 0.6s;
 	}
-
-	.animated-container {
-		position: absolute;
-		visibility: hidden;
-		opacity: 0.8;
-		/* width: 240px; */
-		/* height: 360px; */
-		/* left: 120px; */
-		/* top: 36px; */
-		/* z-index: 307; */
-		/* offset-path: path('M 0 0 L 10 -20'); */
-		/* offset-rotate: 0deg; */
-		/* animation: moveAlongPath 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards ; */
-		/* animation: moveAlongPath 1s; */
-		/* offset-path: path('M 0 0 L 10 30 Z');
-		offset-anchor: top left; */
-		/* offset-distance: 0%; */
-		/* offset-rotate: 0deg; */
-		/* animation: moveDiv 5s cubic-bezier(0.25, 0.1, 0.25, 1); */
-		/* transition: offset-distance 2s; */
-	}
-	@keyframes moveDiv {
-		0% {
-			offset-distance: 0%;
-		}
-		100% {
-			offset-distance: 100%;
-		}
-	}
-
-	@keyframes moveAlongPath {
+	@keyframes moveContainer {
 		0% {
 			offset-distance: 0%;
 		}

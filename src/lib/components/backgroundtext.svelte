@@ -41,7 +41,7 @@
 		position: absolute;
 		/* top: 40%; */
 		animation: fadeout 3s linear forwards;
-		transition: all 1s linear;
+		transition: all 0.5s linear;
 	}
 	.background-text:hover {
 		animation: none;

@@ -47,7 +47,7 @@
 <div class="flex h-full w-full flex-col items-center justify-center p-0">
 
 	<Backgroundtext />
-	<Card />
+	<Card topInitOffset='-3' leftInitOffset='-3'/>
 	<Contacts />
 </div>
 

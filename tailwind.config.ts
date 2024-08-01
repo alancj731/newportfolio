@@ -1,3 +1,4 @@
+import { log } from 'console';
 import type { Config } from 'tailwindcss';
 
 export default {
@@ -6,7 +7,15 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				cardblue: '#081cf4',
+				bgblue: '#081cf4',
+				cardblue: '#0d2b6b',
+				cardbg: '#282828',
+				cardborder: '#040e8d',
+			},
+			borderWidth: {
+				sm: '1px',
+				md: '2px',
+				lg: '3px',
 			}
 		}
 	},

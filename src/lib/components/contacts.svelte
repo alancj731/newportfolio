@@ -61,7 +61,7 @@
 <style>
 	.contact-container {
 		position: absolute;
-		top: 92%;
+		top: 94%;
 	}
 	.icon {
 		transition: all 0.5s linear;
