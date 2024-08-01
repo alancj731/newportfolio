@@ -3,6 +3,8 @@
 	let cardRef: HTMLElement | null = null;
 	export let topInitOffset: string ;
 	export let leftInitOffset: string ;
+	export let topFinalOffset: string ;
+	export let leftFinalOffset: string ;
 	export let bg : string;
 
 	
@@ -23,9 +25,10 @@
 		const deviceHeight = screen.height;
 		const topOffsetUnit = Math.floor(windowHeight * 0.01);
 		const leftOffsetUnit = Math.floor(windowWidth * 0.01);
-		const topOffset = Number(topInitOffset) * topOffsetUnit;
-		const leftOffset = Number(leftInitOffset) * leftOffsetUnit;
-
+		const initTopOffset = Number(topInitOffset) * topOffsetUnit;
+		const initLeftOffset = Number(leftInitOffset) * leftOffsetUnit;
+		const finalTopOffset = Number(topFinalOffset) * topOffsetUnit;
+		const finalLeftOffset = Number(leftFinalOffset) * leftOffsetUnit;
 
 		cardWidth =
 			windowWidth >= 3800
@@ -47,16 +50,16 @@
 			windowHeight > cardHeight
 				? Math.floor((windowHeight - cardHeight) / 2)
 				: Math.floor((deviceHeight - cardHeight) / 2) 
-		cardTop += topOffset;
+		cardTop += initTopOffset + finalTopOffset;
 
 		cardLeft =
 			windowWidth > cardWidth
 				? Math.floor((windowWidth - cardWidth) / 2)
 				: Math.floor((deviceWidth - cardWidth) / 2);
 
-		cardLeft = cardLeft + leftOffset;
+		cardLeft = cardLeft + initLeftOffset + finalLeftOffset;
 
-		pathoffset = `path('M 0 0 L ${-leftOffset} ${-topOffset}')`
+		pathoffset = `path('M 0 0 L ${-initLeftOffset} ${-initTopOffset}')`
 		console.log('pathoffset:', pathoffset)
 	}
 

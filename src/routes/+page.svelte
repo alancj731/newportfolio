@@ -6,10 +6,7 @@
 
 	$: iconSize = '14px';
 
-
 	function adjustDisplay() {
-
-
 		const windowWidth = window.innerWidth;
 		const windowHeight = window.innerHeight;
 
@@ -45,17 +42,15 @@
 </svelte:head>
 
 <div class="flex h-full w-full flex-col items-center justify-center p-0">
-
 	<Backgroundtext />
-	<Card topInitOffset='-10' leftInitOffset='-10' bg="#9195F6"/>
-	<Card topInitOffset='-10' leftInitOffset='10'bg="#7FA1C3"/>
-	<Card topInitOffset='-5' leftInitOffset='-5' bg="#1D24CA"/>
-	<Card topInitOffset='-5' leftInitOffset='5'bg="#0B60B0"/>
-	<Card topInitOffset='-1' leftInitOffset='0' bg="#050C9C"/>
-	
+	<Card topFinalOffset="-1" leftFinalOffset="1" topInitOffset="-10" leftInitOffset="-10"  bg="#225CFB" />
+	<Card topFinalOffset="-0.75" leftFinalOffset="0.75" topInitOffset="-10" leftInitOffset="10" bg="#3572EF" />
+	<Card topFinalOffset="-0.5" leftFinalOffset="0.5" topInitOffset="-5" leftInitOffset="-5" bg="#0D24CA" />
+	<Card topFinalOffset="-0.25" leftFinalOffset="0.25" topInitOffset="-5" leftInitOffset="5" bg="#376CE7" />
+	<Card topFinalOffset="0" leftFinalOffset="0" topInitOffset="-1" leftInitOffset="0" bg="#050CEC" />
+
 	<Contacts />
 </div>
 
 <style>
-	
 </style>
