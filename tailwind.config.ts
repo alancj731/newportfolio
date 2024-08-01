@@ -4,7 +4,11 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				cardblue: '#081cf4',
+			}
+		}
 	},
 
 	plugins: [require('@tailwindcss/typography')]

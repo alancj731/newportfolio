@@ -8,6 +8,9 @@ html, body {
 	overflow: hidden;
 }
 
+.cardblue{
+  background-color: #081cf4;
+}
 
 .playwrite-ar-bg {
   font-family: "Playwrite AR", cursive;
