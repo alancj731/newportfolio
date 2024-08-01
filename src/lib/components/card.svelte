@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	let cardRef: HTMLElement | null = null;
-	export let topInitOffset: string ;
-	export let leftInitOffset: string ;
-	export let topFinalOffset: string ;
-	export let leftFinalOffset: string ;
-	export let bg : string;
+	export let topInitOffset: string;
+	export let leftInitOffset: string;
+	export let topFinalOffset: string;
+	export let leftFinalOffset: string;
+	export let bg: string;
+	export let index: string;
 
-	
 	let pathoffset: string;
 
 	$: cardWidth = 0;
@@ -15,7 +15,6 @@
 	$: cardTop = 0;
 	$: cardLeft = 0;
 	$: pathoffset = '';
-
 
 	function updateCardContainerSizeAndPosition() {
 		console.log('updateCardContainerSizeAndPosition topInitOffset:', topInitOffset);
@@ -49,7 +48,7 @@
 		cardTop =
 			windowHeight > cardHeight
 				? Math.floor((windowHeight - cardHeight) / 2)
-				: Math.floor((deviceHeight - cardHeight) / 2) 
+				: Math.floor((deviceHeight - cardHeight) / 2);
 		cardTop += initTopOffset + finalTopOffset;
 
 		cardLeft =
@@ -59,11 +58,11 @@
 
 		cardLeft = cardLeft + initLeftOffset + finalLeftOffset;
 
-		pathoffset = `path('M 0 0 L ${-initLeftOffset} ${-initTopOffset}')`
-		console.log('pathoffset:', pathoffset)
+		pathoffset = `path('M 0 0 L ${-initLeftOffset} ${-initTopOffset}')`;
+		console.log('pathoffset:', pathoffset);
 	}
 
-	function rerunAnimation(){
+	function rerunAnimation() {
 		if (!cardRef) {
 			console.error('cardRef is null');
 			return;
@@ -152,18 +151,42 @@
 </script>
 
 <div
-	class="card-container hidden rounded-[55px] "
+	class="card-container hidden rounded-[55px]"
 	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px ; 
 	offset-path: {pathoffset};
 	background-color: {bg};"
 	bind:this={cardRef}
 >
-	<div class="card">
-		<slot></slot>
+	<div class="ellipsis bg-bgellipsis">
+		<div class="index text-indexcolor relative rotate-[39deg] transform text-[0.9vw] font-bold">
+			{index}
+		</div>
+
 	</div>
+	{#if index === '1'}
+	<div class="drag-sign text-indexcolor text-[0.9vw] italic">Drag ⟶</div>
+	{/if}
+	
 </div>
 
 <style>
+	.ellipsis {
+		position: absolute;
+		bottom: 3vh;
+		left: 2vw;
+		width: 2.4vw;
+		height: 3.6vh;
+		/* background-color: #073169; */
+		opacity: 90%;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		font-size: 10px;
+		transform: rotate(-40deg);
+	}
+
 	.card-container:hover {
 		cursor: grab;
 	}
@@ -185,5 +208,12 @@
 		100% {
 			offset-distance: 100%;
 		}
+	}
+
+	.drag-sign {
+		position: absolute;
+		width: 4vw;
+		bottom: 3vh;
+		right: 2vw;
 	}
 </style>

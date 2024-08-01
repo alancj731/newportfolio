@@ -11,6 +11,8 @@ export default {
 				cardblue: '#0d2b6b',
 				cardbg: '#282828',
 				cardborder: '#040e8d',
+				bgellipsis: '#03346E',
+				indexcolor: '#FFF1DB',
 			},
 			borderWidth: {
 				sm: '1px',
