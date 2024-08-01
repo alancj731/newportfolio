@@ -19,13 +19,15 @@
 				: windowWidth >= 1900
 					? 600
 					: windowWidth >= 1024
-						? 480
+						? 420
 						: windowWidth >= 820
 							? 400
 							: windowWidth >= 768
 								? 360
-								: 260;
-		cardHeight = cardWidth * 1.5;
+								: windowWidth >= 400
+									? 320
+									: 260;
+		cardHeight = Math.min(cardWidth * 1.5, Math.floor(windowHeight * 0.9));
 
 		cardTop =
 			windowHeight > cardHeight
@@ -58,7 +60,7 @@
 </script>
 
 <div
-	class="card-container hidden bg-white"
+	class="card-container hidden bg-sky-900"
 	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px "
 	bind:this={cardRef}
 >

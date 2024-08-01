@@ -2,20 +2,19 @@
 	import { onMount } from 'svelte';
 	$: bgText = '';
 	$: fontSize = '4vw';
-    $: topPos = '40%';
+	$: topPos = '40%';
 
 	function updateText() {
 		try {
-			const smallDisplay: boolean = window.matchMedia('(max-width: 1280px)').matches;
+			const smallDisplay: boolean = window.matchMedia('(max-width: 768px)').matches;
 
 			bgText = smallDisplay
 				? '        Code never lies,\ncomments sometimes do.'
 				: 'Code never lies, comments sometimes do.';
 
-			fontSize = smallDisplay ? '5vw' : '4vw';
+			fontSize = smallDisplay ? '6vw' : '4vw';
 
-            topPos = smallDisplay ? '38%' : '40%';
-
+			topPos = smallDisplay ? '38%' : '43%';
 		} catch (error) {
 			console.error('Error in updateText', error);
 		}
@@ -50,5 +49,14 @@
 		opacity: 1;
 		transform: scale(1.02);
 		transition: all 1s linear;
+	}
+	@keyframes fadeout {
+		0% {
+			opacity: 1;
+			filter: blur(0px);
+		}
+		100% {
+			opacity: 0.4;
+		}
 	}
 </style>

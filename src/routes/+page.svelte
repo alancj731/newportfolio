@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Card from '$lib/components/card.svelte';
 	import Backgroundtext from '$lib/components/backgroundtext.svelte';
-	import { onMount } from 'svelte';
+	import Contacts from '$lib/components/contacts.svelte';
 
 	$: iconSize = '14px';
 
@@ -47,42 +48,13 @@
 
 	<Backgroundtext />
 	<Card />
-
-	<div class="icons-container flex flex-row justify-center space-x-[5rem]">
-		<div class="icon-container" draggable="true">
-			<a href="https://www.linkedin.com/in/alanchenjian/">
-				<i class="icon fa-brands fa-linkedin-in invert"></i>
-			</a>
-		</div>
-		<div class="icon-container">
-			<a href="https://github.com/alancj731"><i class="icon fa-brands fa-github invert"></i></a>
-		</div>
-	</div>
+	<Contacts />
 </div>
 
 <style>
-	@keyframes fadeout {
-		0% {
-			opacity: 1;
-			filter: blur(0px);
-		}
-		100% {
-			opacity: 0.4;
-		}
-	}
+	
 
-	.icons-container {
-		position: absolute;
-		top: 88%;
-	}
-	.icon {
-		transition: all 0.5s linear;
-	}
-	.icon:hover {
-		filter: none;
-		scale: 1.3;
-		transition: all 0.5s linear;
-	}
+
 
 	.animated-container {
 		position: absolute;
@@ -113,24 +85,6 @@
 		}
 	}
 
-	@media screen and (min-width: 400px) {
-		.background-text {
-			top: 38%;
-			font-size: 6vw;
-		}
-	}
-	@media screen and (min-width: 768px) {
-		.background-text {
-			top: 36%;
-			font-size: 5.5vw;
-		}
-	}
-	@media screen and (min-width: 1024px) {
-		.background-text {
-			top: 40%;
-			font-size: 3.6vw;
-		}
-	}
 	@keyframes moveAlongPath {
 		0% {
 			offset-distance: 0%;
