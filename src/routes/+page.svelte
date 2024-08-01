@@ -1,53 +1,13 @@
 <script lang="ts">
 	import Card from '$lib/components/card.svelte';
+	import Backgroundtext from '$lib/components/backgroundtext.svelte';
 	import { onMount } from 'svelte';
 
-	function adjustCardSize() {
-		// const cards = document.querySelectorAll('.animated-container');
-		// if (!cards) return;
-		// cards.forEach((item) => {
-		// 	const card = item as HTMLElement;
-		// 	if (deviceWidth > 768 || deviceHeight > 768) {
-		// 		card.style.width = '240px';
-		// 		card.style.height = '360px';
-		// 	} else if (deviceWidth > 768 || deviceHeight > 600) {
-		// 		card.style.width = '120px';
-		// 		card.style.height = '180px';
-		// 	} else if (deviceWidth > 480 || deviceHeight > 320) {
-		// 		card.style.width = '60px';
-		// 		card.style.height = '90px';
-		// 	} else {
-		// 		card.style.width = '120px';
-		// 		card.style.height = '180px';
-		// 	}
-		// });
-	}
-
-	$: cardWidth = 0;
-	$: cardHeight = 0;
-	$: cardTop = 0;
-	$: cardLeft = 0;
-	$: bgText;
 	$: iconSize = '14px';
 
-	export let bgText = '';
-
-	// function showCards() {
-	// 	const cards = document.querySelectorAll('.animated-container');
-	// 	if (!cards) return;
-	// 	cards.forEach((item) => {
-	// 		const card = item as HTMLElement;
-	// 		card.style.visibility = 'visible';
-	// 	});
-	// }
 
 	function adjustDisplay() {
-		const smallDisplay: boolean = window.matchMedia('(max-width: 1280px)').matches;
 
-		bgText = smallDisplay
-			? '        Code never lies,\ncomments sometimes do.'
-			: 'Code never lies, comments sometimes do.';
-		// console.log('small display', smallDisplay, bgText);
 
 		const windowWidth = window.innerWidth;
 		const windowHeight = window.innerHeight;
@@ -82,9 +42,10 @@
 <svelte:head>
 	<title>Jian's Portfolio</title>
 </svelte:head>
-<div class="flex h-full w-full flex-col items-center justify-center p-0">
-	<pre class="background-text playwrite-ar-bg leading-loose text-white">{bgText}</pre>
 
+<div class="flex h-full w-full flex-col items-center justify-center p-0">
+
+	<Backgroundtext />
 	<Card />
 
 	<div class="icons-container flex flex-row justify-center space-x-[5rem]">
@@ -110,20 +71,6 @@
 		}
 	}
 
-	.background-text {
-		font-size: 7vw;
-		position: absolute;
-		top: 36%;
-		animation: fadeout 3s linear forwards;
-		transition: all 1s linear;
-	}
-	.background-text:hover {
-		animation: none;
-		color: black;
-		opacity: 1;
-		transform: scale(1.02);
-		transition: all 1s linear;
-	}
 	.icons-container {
 		position: absolute;
 		top: 88%;
