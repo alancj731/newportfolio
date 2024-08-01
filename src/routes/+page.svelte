@@ -47,7 +47,12 @@
 <div class="flex h-full w-full flex-col items-center justify-center p-0">
 
 	<Backgroundtext />
-	<Card topInitOffset='-3' leftInitOffset='-3'/>
+	<Card topInitOffset='-10' leftInitOffset='-10' bg="#9195F6"/>
+	<Card topInitOffset='-10' leftInitOffset='10'bg="#7FA1C3"/>
+	<Card topInitOffset='-5' leftInitOffset='-5' bg="#1D24CA"/>
+	<Card topInitOffset='-5' leftInitOffset='5'bg="#0B60B0"/>
+	<Card topInitOffset='-1' leftInitOffset='0' bg="#050C9C"/>
+	
 	<Contacts />
 </div>
 

@@ -3,6 +3,8 @@
 	let cardRef: HTMLElement | null = null;
 	export let topInitOffset: string ;
 	export let leftInitOffset: string ;
+	export let bg : string;
+
 	
 	let pathoffset: string;
 
@@ -147,9 +149,10 @@
 </script>
 
 <div
-	class="card-container hidden rounded-[55px] bg-cardbg"
+	class="card-container hidden rounded-[55px] "
 	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px ; 
-	offset-path: {pathoffset};"
+	offset-path: {pathoffset};
+	background-color: {bg};"
 	bind:this={cardRef}
 >
 	<div class="card">
