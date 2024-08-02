@@ -186,11 +186,18 @@
 		font-size: 10px;
 		transform: rotate(-40deg);
 	}
+	
+	.drag-sign {
+		position: absolute;
+		width: 4vw;
+		bottom: 3.5vh;
+		right: 1vw;
+	}
 
 	.card-container:hover {
 		cursor: grab;
 	}
-
+	
 	.card-container {
 		position: absolute;
 		opacity: 1;
@@ -198,7 +205,7 @@
 		offset-anchor: top left;
 		offset-distance: 0%;
 		offset-rotate: 0deg;
-		animation: moveContainer 1s cubic-bezier(0, 0, 0.5, 0.5) forwards;
+		animation: moveContainer 1.8s cubic-bezier(0.3, 0.25, 0.8, 0.6) forwards;
 		animation-delay: 0.6s;
 	}
 	@keyframes moveContainer {
@@ -210,10 +217,4 @@
 		}
 	}
 
-	.drag-sign {
-		position: absolute;
-		width: 4vw;
-		bottom: 3vh;
-		right: 2vw;
-	}
 </style>
