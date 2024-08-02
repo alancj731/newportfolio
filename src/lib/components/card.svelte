@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
+	import { cardsStatus } from '../../stores/cardstatus';
 	let cardRef: HTMLElement | null = null;
 	export let topInitOffset: string;
 	export let leftInitOffset: string;
@@ -17,7 +19,6 @@
 	$: pathoffset = '';
 
 	function updateCardContainerSizeAndPosition() {
-		console.log('updateCardContainerSizeAndPosition topInitOffset:', topInitOffset);
 		const windowWidth = window.innerWidth;
 		const windowHeight = window.innerHeight;
 		const deviceWidth = screen.width;
@@ -59,12 +60,16 @@
 		cardLeft = cardLeft + initLeftOffset + finalLeftOffset;
 
 		pathoffset = `path('M 0 0 L ${-initLeftOffset} ${-initTopOffset}')`;
-		console.log('pathoffset:', pathoffset);
+
+		if (get(cardsStatus).width !== cardWidth || get(cardsStatus).height !== cardHeight) {
+			// update value in store so that some other components can change it daynamicly
+			cardsStatus.set({width: cardWidth, height: cardHeight});
+			console.log("cardsStatus updated:", get(cardsStatus));
+		}
 	}
 
 	function rerunAnimation() {
 		if (!cardRef) {
-			console.error('cardRef is null');
 			return;
 		}
 		cardRef.style.animation = 'none';
@@ -157,16 +162,15 @@
 	background-color: {bg};"
 	bind:this={cardRef}
 >
+	<slot></slot>
 	<div class="ellipsis bg-bgellipsis">
-		<div class="index text-indexcolor relative rotate-[39deg] transform text-[0.9vw] font-bold">
+		<div class="index relative rotate-[39deg] transform text-[0.9vw] font-bold text-indexcolor">
 			{index}
 		</div>
-
 	</div>
 	{#if index === '1'}
-	<div class="drag-sign text-indexcolor text-[0.9vw] italic">Drag ⟶</div>
+		<div class="drag-sign text-[0.9vw] italic text-indexcolor">Drag ⟶</div>
 	{/if}
-	
 </div>
 
 <style>
@@ -186,7 +190,7 @@
 		font-size: 10px;
 		transform: rotate(-40deg);
 	}
-	
+
 	.drag-sign {
 		position: absolute;
 		width: 4vw;
@@ -197,7 +201,7 @@
 	.card-container:hover {
 		cursor: grab;
 	}
-	
+
 	.card-container {
 		position: absolute;
 		opacity: 1;
@@ -216,5 +220,4 @@
 			offset-distance: 100%;
 		}
 	}
-
 </style>
