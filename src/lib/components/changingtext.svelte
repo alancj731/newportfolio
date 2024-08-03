@@ -5,7 +5,7 @@
 
 	const texts = [
 		"Hi, I'm Jian\n",
-		'  My career started as a  software engineer at HP. I have held positions at various IT and high tech companies, including Cisco, Commscope and Corning. My most recent role was as the founder and CEO  of a company with an year revenue of 2 million CAD before I moved to Canada.',
+		'  My career started as a  software engineer at HP. I had held positions at various IT and high tech companies, including Cisco, Commscope and Corning. My last role before I re-located to Canada was a founder of a startup that achieved a 2M CAD annual revenue ...',
 		'  I recently graduated   from the Data Science and Machine Learning program at Red River College and my GPA is 4.46/4.5.',
 		'  I was the only student that bypassed three major courses through the RPL (Recognition of Prior    Learning) test. I have   self-taught web dev and  cloud computing through  both personal projects & volunteer works.',
 		'  My tech stack includes Python, Deep Learning,   Unsupervised Learning,   TypeScript, React, Svelte, Next.js, Express, Git, CI/CD, SQL, Azure, GCP,   and more...'
@@ -120,7 +120,7 @@
 		}
 		displayText = prevText + currentText;
 
-		setTimeout(updateText, deleting ? 50 : 100);
+		setTimeout(updateText, deleting ? 30 : 150);
 	}
 
 	onMount(() => {

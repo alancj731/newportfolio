@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import { cardsStatus, zIndex, zIndexStartPos } from '../../stores/cardstatus';
+	import { cardsStatus, indexRanking, getZIndex, bringTargetToTop } from '../../stores/cardstatus';
 	let cardRef: HTMLElement | null = null;
 	export let topInitOffset: string;
 	export let leftInitOffset: string;
@@ -110,7 +110,7 @@
 		initialTop = cardRef.offsetTop;
 
 		// update zIndexStartPos		
-		zIndexStartPos.set(Number(index));
+		bringTargetToTop(Number(index));
 		return true;
 	}
 
@@ -184,9 +184,6 @@
 		}
 	}
 
-	function getCurrentZIndex() {
-		return get(zIndex)[(5 - get(zIndexStartPos) + Number(index)) % 5].toString();
-	}
 
 	onMount(() => {
 		if (!cardRef) {
@@ -209,15 +206,16 @@
 		// enable draggability
 		enableDraggability();
 
-		const unsubscribezIndexStartPos = zIndexStartPos.subscribe((value) => {
+		const unsubscribindexRanking = indexRanking.subscribe((value) => {
+
 			if (!cardRef) {
 				return;
 			}	
-			cardRef.style.zIndex = getCurrentZIndex();
+			cardRef.style.zIndex = getZIndex(Number(index));
 		});
 
 		return () => {
-			unsubscribezIndexStartPos();
+			unsubscribindexRanking();
 		};
 
 });
@@ -227,7 +225,7 @@
 	class="card-container hidden rounded-[35px] {bg}"
 	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px ; 
 	 offset-path: {pathoffset};
-	 z-index: {getCurrentZIndex()};"
+	 z-index: {getZIndex(Number(index))};"
 	bind:this={cardRef}
 >	
 	<slot></slot>
