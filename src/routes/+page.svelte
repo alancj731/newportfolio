@@ -44,7 +44,7 @@
 
 	<Card
 		title="Bubble Sort"
-		image=""
+		image="/imgs/test.jpg"
 		index="4"
 		topFinalOffset="-1"
 		leftFinalOffset="0.5"
@@ -55,7 +55,7 @@
 	></Card>
 	<Card
 		title="Tetris"
-		image=""
+		image="/imgs/test.jpg"
 		index="3"
 		topFinalOffset="-0.75"
 		leftFinalOffset="0.25"
@@ -66,7 +66,7 @@
 	/>
 	<Card
 		title="Animation Demo"
-		image=""
+		image="/imgs/test.jpg"
 		index="2"
 		topFinalOffset="-0.5"
 		leftFinalOffset="0"
