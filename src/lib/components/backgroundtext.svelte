@@ -12,9 +12,9 @@
 				? '        Code never lies,\ncomments sometimes do.'
 				: 'Code never lies, comments sometimes do.';
 
-			fontSize = smallDisplay ? '6vw' : '4vw';
+			fontSize = smallDisplay ? '5vw' : '2vw';
 
-			topPos = smallDisplay ? '38%' : '43%';
+			topPos = smallDisplay ? '2%' : '3%';
 		} catch (error) {
 			console.error('Error in updateText', error);
 		}

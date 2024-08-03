@@ -3,6 +3,7 @@
 	import { get } from 'svelte/store';
 	import { cardsStatus, indexRanking, getZIndex, bringTargetToTop } from '../../stores/cardstatus';
 	let cardRef: HTMLElement | null = null;
+	export let title: string;
 	export let index: string;
 	export let topFinalOffset: string;
 	export let leftFinalOffset: string;
@@ -226,6 +227,15 @@
 	 z-index: {getZIndex(Number(index))};"
 	bind:this={cardRef}
 >
+	{#if title !== ''}
+		<div class="title-container flex w-full justify-center text-center">
+			<div class="title absolute text-white" style="
+			font-size: {`${Math.floor(cardWidth * 0.04)}px`};
+			top: {`${Math.floor(cardWidth * 0.05)}px`};">
+				{title}
+			</div>
+		</div>
+	{/if}
 	<slot></slot>
 	<div
 		class="ellipsis bg-white"

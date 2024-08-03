@@ -46,43 +46,47 @@
 	<Backgroundtext />
 
 	<Card
+		title="Bubble Sort"
 		index="4"
 		topFinalOffset="-1"
 		leftFinalOffset="0.5"
 		topInitOffset="-4"
 		leftInitOffset="-10"
-		link="https://www.youtube.com"
+		link="https://sorting-ten.vercel.app/"
 		bg="bg-blue-950"
-	>
-	</Card>
+	></Card>
 	<Card
+		title="Tetris"
 		index="3"
 		topFinalOffset="-0.75"
 		leftFinalOffset="0.25"
 		topInitOffset="-7"
 		leftInitOffset="12"
-		link="https://www.google.com"
+		link="https://tetris-js-nine-psi.vercel.app/"
 		bg="bg-blue-900"
 	/>
 	<Card
+		title="Animation Demo"
 		index="2"
 		topFinalOffset="-0.5"
 		leftFinalOffset="0"
 		topInitOffset="4"
 		leftInitOffset="-13"
-		link="https://www.yahoo.com"
+		link="https://animation-three-umber.vercel.app/"
 		bg="bg-blue-800"
 	/>
 	<Card
+		title="JWT Demo"
 		index="1"
 		topFinalOffset="-0.25"
 		leftFinalOffset="-0.25"
 		topInitOffset="1"
 		leftInitOffset="9"
-		link="https://www.chatgpt.com"
+		link="https://jwttokendemo.vercel.app/"
 		bg="bg-blue-700"
 	/>
 	<Card
+		title=""
 		index="0"
 		topFinalOffset="0"
 		leftFinalOffset="-0.5"
