@@ -11,9 +11,6 @@
 		const windowWidth = window.innerWidth;
 		const windowHeight = window.innerHeight;
 
-		const deviceWidth = screen.width;
-		const deviceHeight = screen.height;
-
 		iconSize =
 			windowWidth >= 3800
 				? '58px'
@@ -47,6 +44,7 @@
 
 	<Card
 		title="Bubble Sort"
+		image=""
 		index="4"
 		topFinalOffset="-1"
 		leftFinalOffset="0.5"
@@ -57,6 +55,7 @@
 	></Card>
 	<Card
 		title="Tetris"
+		image=""
 		index="3"
 		topFinalOffset="-0.75"
 		leftFinalOffset="0.25"
@@ -67,6 +66,7 @@
 	/>
 	<Card
 		title="Animation Demo"
+		image=""
 		index="2"
 		topFinalOffset="-0.5"
 		leftFinalOffset="0"
@@ -77,6 +77,7 @@
 	/>
 	<Card
 		title="JWT Demo"
+		image="/imgs/test.jpg"
 		index="1"
 		topFinalOffset="-0.25"
 		leftFinalOffset="-0.25"
@@ -87,6 +88,7 @@
 	/>
 	<Card
 		title=""
+		image=""
 		index="0"
 		topFinalOffset="0"
 		leftFinalOffset="-0.5"

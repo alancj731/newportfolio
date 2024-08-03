@@ -4,6 +4,7 @@
 	import { cardsStatus, indexRanking, getZIndex, bringTargetToTop } from '../../stores/cardstatus';
 
 	export let title: string;
+	export let image: string;
 	export let index: string;
 	export let topFinalOffset: string;
 	export let leftFinalOffset: string;
@@ -255,6 +256,19 @@
 			</div>
 		</div>
 	{/if}
+	{#if image !== ''}
+		<div class="image-containe flex w-full justify-center items-center">
+			<!-- svelte-ignore a11y-img-redundant-alt -->
+			<img
+				class="app-image rounded-xl relative bg-transparent overflow-hidden"
+				src={image}
+				alt="image"
+				style="top: {`${Math.floor(cardWidth * 0.13)}px`};
+				width:{`${Math.floor(cardWidth * 0.85)}px`};
+				height:{`${Math.floor(cardHeight * 0.78)}px`};"
+			/>
+		</div>
+	{/if}
 	<slot></slot>
 	<div
 		class="ellipsis bg-white"
@@ -315,6 +329,9 @@
 		offset-rotate: 0deg;
 		animation: moveContainer 1.8s cubic-bezier(0.3, 0.25, 0.8, 0.6) forwards;
 		animation-delay: 0.6s;
+	}
+	.app-image {
+		object-fit: cover;
 	}
 	@keyframes moveContainer {
 		0% {
