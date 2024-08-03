@@ -46,7 +46,7 @@
 	<Backgroundtext />
 
 	<Card
-		index="5"
+		index="4"
 		topFinalOffset="-1"
 		leftFinalOffset="0.5"
 		topInitOffset="-4"
@@ -55,7 +55,7 @@
 	>
 	</Card>
 	<Card
-		index="4"
+		index="3"
 		topFinalOffset="-0.75"
 		leftFinalOffset="0.25"
 		topInitOffset="-7"
@@ -63,7 +63,7 @@
 		bg="bg-blue-900"
 	/>
 	<Card
-		index="3"
+		index="2"
 		topFinalOffset="-0.5"
 		leftFinalOffset="0"
 		topInitOffset="4"
@@ -71,7 +71,7 @@
 		bg="bg-blue-800"
 	/>
 	<Card
-		index="2"
+		index="1"
 		topFinalOffset="-0.25"
 		leftFinalOffset="-0.25"
 		topInitOffset="1"
@@ -79,7 +79,7 @@
 		bg="bg-blue-700"
 	/>
 	<Card
-		index="1"
+		index="0"
 		topFinalOffset="0"
 		leftFinalOffset="-0.5"
 		topInitOffset="-2"

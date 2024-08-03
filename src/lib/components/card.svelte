@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import { cardsStatus } from '../../stores/cardstatus';
+	import { cardsStatus, zIndex, zIndexStartPos } from '../../stores/cardstatus';
 	let cardRef: HTMLElement | null = null;
 	export let topInitOffset: string;
 	export let leftInitOffset: string;
@@ -109,6 +109,8 @@
 		initialLeft = cardRef.offsetLeft;
 		initialTop = cardRef.offsetTop;
 
+		// update zIndexStartPos		
+		zIndexStartPos.set(Number(index));
 		return true;
 	}
 
@@ -121,7 +123,6 @@
 
 		// prepare drag and drop for laptop
 		cardRef.addEventListener('mousedown', (event) => {
-			console.log('mousedown');
 			if (!handleDragStart(event)) {
 				return;
 			}
@@ -144,7 +145,6 @@
 	}
 	function moveElement(event: MouseEvent | TouchEvent) {
 		if (!cardRef) {
-			console.error('cardRef is null');
 			return;
 		}
 		if (cardRef.draggable === false) {
@@ -184,6 +184,10 @@
 		}
 	}
 
+	function getCurrentZIndex() {
+		return get(zIndex)[(5 - get(zIndexStartPos) + Number(index)) % 5].toString();
+	}
+
 	onMount(() => {
 		if (!cardRef) {
 			console.error('cardRef is null');
@@ -204,15 +208,28 @@
 
 		// enable draggability
 		enableDraggability();
-	});
+
+		const unsubscribezIndexStartPos = zIndexStartPos.subscribe((value) => {
+			if (!cardRef) {
+				return;
+			}	
+			cardRef.style.zIndex = getCurrentZIndex();
+		});
+
+		return () => {
+			unsubscribezIndexStartPos();
+		};
+
+});
 </script>
 
 <div
 	class="card-container hidden rounded-[35px] {bg}"
 	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px ; 
-	 offset-path: {pathoffset};"
+	 offset-path: {pathoffset};
+	 z-index: {getCurrentZIndex()};"
 	bind:this={cardRef}
->
+>	
 	<slot></slot>
 	<div
 		class="ellipsis bg-white"
@@ -228,10 +245,10 @@
 		left: {`${Math.floor(cardWidth * 0)}px`};
 		bottom: {`${Math.floor(cardWidth * 0.004)}px`}"
 		>
-			{index}
+			{Number(index)+1}
 		</div>
 	</div>
-	{#if index === '1'}
+	{#if index === '0'}
 		<div
 			class="drag-sign absolute italic text-white"
 			style="font-size: {`${Math.floor(cardWidth * 0.04)}px`};
