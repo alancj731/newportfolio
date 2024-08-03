@@ -91,14 +91,11 @@
 			console.error('cardRef is null');
 			return false;
 		}
-		if (cardRef.draggable) {
-			return false;
-		}
 		cardRef.draggable = true;
 		event.preventDefault();
 
 		// Initial mouse position
-		if (typeof(event) === typeof(TouchEvent)) {
+		if (typeof event === typeof TouchEvent) {
 			const touchEvent = event as TouchEvent;
 			initialMouseDownX = touchEvent.touches[0].clientX;
 			initialMouseDownY = touchEvent.touches[0].clientY;
@@ -121,6 +118,7 @@
 			return;
 		}
 		cardRef.draggable = false;
+
 		// prepare drag and drop for laptop
 		cardRef.addEventListener('mousedown', (event) => {
 			if (!handleDragStart(event)) {
@@ -142,7 +140,6 @@
 			cardRef!.addEventListener('touchmove', moveElement);
 			cardRef!.addEventListener('touchend', stopMoving);
 		});
-
 	}
 	function moveElement(event: MouseEvent | TouchEvent) {
 		if (!cardRef) {
@@ -155,14 +152,11 @@
 		let newX: number;
 		let newY: number;
 		// Calculate new position
-		if (typeof(event) === typeof(TouchEvent)) {
+		if (typeof event === typeof TouchEvent) {
 			const touchEvent = event as TouchEvent;
 			newX = initialLeft + touchEvent.touches[0].clientX - initialMouseDownX;
 			newY = initialTop + touchEvent.touches[0].clientY - initialMouseDownY;
-			// Update element position
-		
-		}
-		else{
+		} else {
 			const mouseEvent = event as MouseEvent;
 			newX = initialLeft + mouseEvent.clientX - initialMouseDownX;
 			newY = initialTop + mouseEvent.clientY - initialMouseDownY;
@@ -180,7 +174,7 @@
 		}
 		cardRef.draggable = false;
 		// Remove event listeners
-		if (typeof(event) === typeof(TouchEvent)) {
+		if (typeof event === typeof TouchEvent) {
 			cardRef.removeEventListener('touchmove', moveElement);
 			cardRef.removeEventListener('touchend', stopMoving);
 		} else {
