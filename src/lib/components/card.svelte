@@ -63,8 +63,7 @@
 
 		if (get(cardsStatus).width !== cardWidth || get(cardsStatus).height !== cardHeight) {
 			// update value in store so that some other components can change it daynamicly
-			cardsStatus.set({width: cardWidth, height: cardHeight});
-			console.log("cardsStatus updated:", get(cardsStatus));
+			cardsStatus.set({ width: cardWidth, height: cardHeight });
 		}
 	}
 
@@ -132,7 +131,6 @@
 	}
 
 	onMount(() => {
-		console.log('card.svelte onMount');
 		if (!cardRef) {
 			console.error('cardRef is null');
 			return;
@@ -156,15 +154,14 @@
 </script>
 
 <div
-	class="card-container hidden rounded-[55px]"
+	class="card-container hidden rounded-[55px] {bg}"
 	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px ; 
-	offset-path: {pathoffset};
-	background-color: {bg};"
+	 offset-path: {pathoffset};"
 	bind:this={cardRef}
 >
 	<slot></slot>
-	<div class="ellipsis bg-bgellipsis">
-		<div class="index relative rotate-[39deg] transform text-[0.9vw] font-bold text-indexcolor">
+	<div class="ellipsis bg-white">
+		<div class="index relative rotate-[39deg] transform text-[0.9vw] font-bold text-black">
 			{index}
 		</div>
 	</div>
