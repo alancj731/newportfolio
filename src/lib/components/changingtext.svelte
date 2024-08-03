@@ -120,7 +120,7 @@
 		}
 		displayText = prevText + currentText;
 
-		setTimeout(updateText, deleting ? 50 : 150);
+		setTimeout(updateText, deleting ? 50 : 100);
 	}
 
 	onMount(() => {

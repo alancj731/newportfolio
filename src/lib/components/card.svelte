@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { cardsStatus } from '../../stores/cardstatus';
+	import type { Mouse } from '@playwright/test';
 	let cardRef: HTMLElement | null = null;
 	export let topInitOffset: string;
 	export let leftInitOffset: string;
@@ -11,6 +12,15 @@
 	export let index: string;
 
 	let pathoffset: string;
+
+	// for handle drag drop
+	// Initial mouse down position
+	let initialMouseDownX: number;
+	let initialMouseDownY: number;
+
+	// Initial element position for mouse down
+	let initialLeft: number;
+	let initialTop: number;
 
 	$: cardWidth = 0;
 	$: cardHeight = 0;
@@ -76,58 +86,107 @@
 		cardRef.style.animation = '';
 	}
 
+	function handleDragStart(event: MouseEvent | TouchEvent) {
+		if (!cardRef) {
+			console.error('cardRef is null');
+			return false;
+		}
+		if (cardRef.draggable) {
+			return false;
+		}
+		cardRef.draggable = true;
+		event.preventDefault();
+
+		// Initial mouse position
+		if (typeof(event) === typeof(TouchEvent)) {
+			const touchEvent = event as TouchEvent;
+			initialMouseDownX = touchEvent.touches[0].clientX;
+			initialMouseDownY = touchEvent.touches[0].clientY;
+		} else {
+			const mouseEvent = event as MouseEvent;
+			initialMouseDownX = mouseEvent.clientX;
+			initialMouseDownY = mouseEvent.clientY;
+		}
+
+		// Initial element position
+		initialLeft = cardRef.offsetLeft;
+		initialTop = cardRef.offsetTop;
+
+		return true;
+	}
+
 	function enableDraggability() {
 		if (!cardRef) {
 			console.error('cardRef is null');
 			return;
 		}
-		cardRef.draggable = true;
+		cardRef.draggable = false;
+		// prepare drag and drop for laptop
 		cardRef.addEventListener('mousedown', (event) => {
-			if (!cardRef) {
-				console.error('cardRef is null');
+			if (!handleDragStart(event)) {
 				return;
-			}
-			event.preventDefault();
-
-			// Initial mouse position
-			let initialX = event.clientX;
-			let initialY = event.clientY;
-
-			// Initial element position
-			let initialLeft = cardRef.offsetLeft;
-			let initialTop = cardRef.offsetTop;
-
-			function moveElement(event: MouseEvent) {
-				if (!cardRef) {
-					console.error('cardRef is null');
-					return;
-				}
-				// Calculate new position
-				let newX = initialLeft + event.clientX - initialX;
-				let newY = initialTop + event.clientY - initialY;
-
-				// Update element position
-				cardRef.style.left = newX + 'px';
-				cardRef.style.top = newY + 'px';
-			}
-
-			function stopMoving() {
-				if (!cardRef) {
-					console.error('cardRef is null');
-					return;
-				}
-				// Remove event listeners
-				cardRef.removeEventListener('mousemove', moveElement);
-				cardRef.removeEventListener('mouseup', stopMoving);
-
-				// Hide the element by adding a class
-				// dragElement.classList.add("dragging");
 			}
 
 			// Add event listeners for mouse movement and release
-			cardRef.addEventListener('mousemove', moveElement);
-			cardRef.addEventListener('mouseup', stopMoving);
+			cardRef!.addEventListener('mousemove', moveElement);
+			cardRef!.addEventListener('mouseup', stopMoving);
 		});
+
+		// prepare drag and drop for mobile
+		cardRef.addEventListener('touchstart', (event) => {
+			if (!handleDragStart(event)) {
+				return;
+			}
+
+			// Add event listeners for mouse movement and release
+			cardRef!.addEventListener('touchmove', moveElement);
+			cardRef!.addEventListener('touchend', stopMoving);
+		});
+
+	}
+	function moveElement(event: MouseEvent | TouchEvent) {
+		if (!cardRef) {
+			console.error('cardRef is null');
+			return;
+		}
+		if (cardRef.draggable === false) {
+			return;
+		}
+		let newX: number;
+		let newY: number;
+		// Calculate new position
+		if (typeof(event) === typeof(TouchEvent)) {
+			const touchEvent = event as TouchEvent;
+			newX = initialLeft + touchEvent.touches[0].clientX - initialMouseDownX;
+			newY = initialTop + touchEvent.touches[0].clientY - initialMouseDownY;
+			// Update element position
+		
+		}
+		else{
+			const mouseEvent = event as MouseEvent;
+			newX = initialLeft + mouseEvent.clientX - initialMouseDownX;
+			newY = initialTop + mouseEvent.clientY - initialMouseDownY;
+		}
+
+		// Update element position
+		cardRef.style.left = newX + 'px';
+		cardRef.style.top = newY + 'px';
+	}
+
+	function stopMoving(event: MouseEvent | TouchEvent) {
+		if (!cardRef) {
+			console.error('cardRef is null');
+			return;
+		}
+		cardRef.draggable = false;
+		// Remove event listeners
+		if (typeof(event) === typeof(TouchEvent)) {
+			cardRef.removeEventListener('touchmove', moveElement);
+			cardRef.removeEventListener('touchend', stopMoving);
+		} else {
+			cardRef.removeEventListener('mousemove', moveElement);
+			cardRef.removeEventListener('mouseup', stopMoving);
+		}
 	}
 
 	onMount(() => {
@@ -154,7 +213,7 @@
 </script>
 
 <div
-	class="card-container hidden rounded-[55px] {bg}"
+	class="card-container hidden rounded-[35px] {bg}"
 	style="width: {cardWidth}px; height:{cardHeight}px; top: {cardTop}px; left:{cardLeft}px ; 
 	 offset-path: {pathoffset};"
 	bind:this={cardRef}
