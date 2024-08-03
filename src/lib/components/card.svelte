@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { cardsStatus, indexRanking, getZIndex, bringTargetToTop } from '../../stores/cardstatus';
-	let cardRef: HTMLElement | null = null;
+
 	export let title: string;
 	export let index: string;
 	export let topFinalOffset: string;
@@ -11,6 +11,9 @@
 	export let leftInitOffset: string;
 	export let link: string;
 	export let bg: string;
+
+	let cardRef: HTMLElement | null = null;
+	let linkRef: HTMLElement | null = null;
 
 	let pathoffset: string;
 
@@ -94,7 +97,6 @@
 		}
 
 		cardRef.draggable = true;
-		event.preventDefault();
 
 		// Initial mouse position
 		if (event instanceof TouchEvent) {
@@ -113,6 +115,8 @@
 
 		// update zIndexStartPos
 		bringTargetToTop(Number(index));
+
+		event.preventDefault();
 		return true;
 	}
 
@@ -207,6 +211,18 @@
 		// enable draggability
 		enableDraggability();
 
+		// add event listener for link
+		if (linkRef) {
+			linkRef.addEventListener('touchstart', (event) => {
+				// since default behavior is disabled, we need to handle it manually
+				if (link === '') {
+					return;
+				}
+				window.open(link, '_blank');
+			});
+		}
+
+
 		const unsubscribindexRanking = indexRanking.subscribe((value) => {
 			if (!cardRef) {
 				return;
@@ -229,9 +245,12 @@
 >
 	{#if title !== ''}
 		<div class="title-container flex w-full justify-center text-center">
-			<div class="title absolute text-white" style="
+			<div
+				class="title absolute text-white"
+				style="
 			font-size: {`${Math.floor(cardWidth * 0.04)}px`};
-			top: {`${Math.floor(cardWidth * 0.05)}px`};">
+			top: {`${Math.floor(cardWidth * 0.05)}px`};"
+			>
 				{title}
 			</div>
 		</div>
@@ -256,6 +275,7 @@
 	</div>
 
 	<div
+		bind:this={linkRef}
 		class="drag-sign absolute italic text-white"
 		style="font-size: {`${Math.floor(cardWidth * 0.04)}px`};
 			right: {`${Math.floor(cardWidth * 0.08)}px`};
