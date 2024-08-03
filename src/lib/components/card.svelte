@@ -97,7 +97,6 @@
 		// Initial mouse position
 		if (event instanceof TouchEvent) {
 			const touchEvent = event as TouchEvent;
-			console.log('touchEvent:', touchEvent.touches[0].clientX, touchEvent.touches[0].clientY);
 			initialMouseDownX = touchEvent.touches[0].clientX;
 			initialMouseDownY = touchEvent.touches[0].clientY;
 		} else {
@@ -109,9 +108,6 @@
 		// Initial element position
 		initialLeft = cardRef.offsetLeft;
 		initialTop = cardRef.offsetTop;
-
-		console.log('initialLeft:', initialLeft, 'initialTop:', initialTop);
-		console.log('initialMouseDownX:', initialMouseDownX, 'initialMouseDownY:', initialMouseDownY);
 
 		return true;
 	}
@@ -137,7 +133,6 @@
 
 		// prepare drag and drop for mobile
 		cardRef.addEventListener('touchstart', (event) => {
-			console.log('touchstart');
 			if (!handleDragStart(event)) {
 				return;
 			}
@@ -219,39 +214,46 @@
 	bind:this={cardRef}
 >
 	<slot></slot>
-	<div class="ellipsis bg-white">
-		<div class="index relative rotate-[39deg] transform text-[0.9vw] font-bold text-black">
+	<div
+		class="ellipsis bg-white"
+		style="
+		width:{`${Math.floor(cardWidth * 0.1)}px`};
+		height:{`${Math.floor(cardWidth * 0.07)}px`};
+		left: {`${Math.floor(cardWidth * 0.08)}px`};
+		bottom: {`${Math.floor(cardWidth * 0.1)}px`}"
+	>
+		<div
+			class="index relative rotate-[39deg] transform font-bold text-black"
+			style="font-size: {`${Math.floor(cardWidth * 0.04)}px`};
+		left: {`${Math.floor(cardWidth * 0)}px`};
+		bottom: {`${Math.floor(cardWidth * 0.004)}px`}"
+		>
 			{index}
 		</div>
 	</div>
 	{#if index === '1'}
-		<div class="drag-sign text-[0.9vw] italic text-indexcolor">Drag ⟶</div>
+		<div
+			class="drag-sign absolute italic text-white"
+			style="font-size: {`${Math.floor(cardWidth * 0.04)}px`};
+			right: {`${Math.floor(cardWidth * 0.08)}px`};
+			bottom: {`${Math.floor(cardWidth * 0.1)}px`};"
+		>
+			Drag ⟶
+		</div>
 	{/if}
 </div>
 
 <style>
 	.ellipsis {
 		position: absolute;
-		bottom: 3vh;
-		left: 2vw;
-		width: 2.4vw;
-		height: 3.6vh;
 		/* background-color: #073169; */
-		opacity: 90%;
+		opacity: 80%;
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		color: white;
-		font-size: 10px;
 		transform: rotate(-40deg);
-	}
-
-	.drag-sign {
-		position: absolute;
-		width: 4vw;
-		bottom: 3.5vh;
-		right: 1vw;
 	}
 
 	.card-container:hover {
