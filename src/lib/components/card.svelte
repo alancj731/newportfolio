@@ -3,12 +3,13 @@
 	import { get } from 'svelte/store';
 	import { cardsStatus, indexRanking, getZIndex, bringTargetToTop } from '../../stores/cardstatus';
 	let cardRef: HTMLElement | null = null;
-	export let topInitOffset: string;
-	export let leftInitOffset: string;
+	export let index: string;
 	export let topFinalOffset: string;
 	export let leftFinalOffset: string;
+	export let topInitOffset: string;
+	export let leftInitOffset: string;
+	export let link: string;
 	export let bg: string;
-	export let index: string;
 
 	let pathoffset: string;
 
@@ -109,7 +110,7 @@
 		initialLeft = cardRef.offsetLeft;
 		initialTop = cardRef.offsetTop;
 
-		// update zIndexStartPos		
+		// update zIndexStartPos
 		bringTargetToTop(Number(index));
 		return true;
 	}
@@ -184,7 +185,6 @@
 		}
 	}
 
-
 	onMount(() => {
 		if (!cardRef) {
 			console.error('cardRef is null');
@@ -207,18 +207,16 @@
 		enableDraggability();
 
 		const unsubscribindexRanking = indexRanking.subscribe((value) => {
-
 			if (!cardRef) {
 				return;
-			}	
+			}
 			cardRef.style.zIndex = getZIndex(Number(index));
 		});
 
 		return () => {
 			unsubscribindexRanking();
 		};
-
-});
+	});
 </script>
 
 <div
@@ -227,7 +225,7 @@
 	 offset-path: {pathoffset};
 	 z-index: {getZIndex(Number(index))};"
 	bind:this={cardRef}
->	
+>
 	<slot></slot>
 	<div
 		class="ellipsis bg-white"
@@ -243,19 +241,22 @@
 		left: {`${Math.floor(cardWidth * 0)}px`};
 		bottom: {`${Math.floor(cardWidth * 0.004)}px`}"
 		>
-			{Number(index)+1}
+			{Number(index) + 1}
 		</div>
 	</div>
-	{#if index === '0'}
-		<div
-			class="drag-sign absolute italic text-white"
-			style="font-size: {`${Math.floor(cardWidth * 0.04)}px`};
+
+	<div
+		class="drag-sign absolute italic text-white"
+		style="font-size: {`${Math.floor(cardWidth * 0.04)}px`};
 			right: {`${Math.floor(cardWidth * 0.08)}px`};
 			bottom: {`${Math.floor(cardWidth * 0.1)}px`};"
-		>
-			Drag ⟶
-		</div>
-	{/if}
+	>
+		{#if link === ''}
+			Drag⟶
+		{:else}
+			<a href={link} target="_blank">Visit⟶</a>
+		{/if}
+	</div>
 </div>
 
 <style>

@@ -51,6 +51,7 @@
 		leftFinalOffset="0.5"
 		topInitOffset="-4"
 		leftInitOffset="-10"
+		link="https://www.youtube.com"
 		bg="bg-blue-950"
 	>
 	</Card>
@@ -60,6 +61,7 @@
 		leftFinalOffset="0.25"
 		topInitOffset="-7"
 		leftInitOffset="12"
+		link="https://www.google.com"
 		bg="bg-blue-900"
 	/>
 	<Card
@@ -68,6 +70,7 @@
 		leftFinalOffset="0"
 		topInitOffset="4"
 		leftInitOffset="-13"
+		link="https://www.yahoo.com"
 		bg="bg-blue-800"
 	/>
 	<Card
@@ -76,6 +79,7 @@
 		leftFinalOffset="-0.25"
 		topInitOffset="1"
 		leftInitOffset="9"
+		link="https://www.chatgpt.com"
 		bg="bg-blue-700"
 	/>
 	<Card
@@ -84,6 +88,7 @@
 		leftFinalOffset="-0.5"
 		topInitOffset="-2"
 		leftInitOffset="0"
+		link=""
 		bg="bg-blue-600"
 	>
 		<Changingtext />
