@@ -7,14 +7,13 @@
 
 	function updateIconSizeAndPosition() {
 		if (!contactContainerRef) {
-			console.error('contactContainerRef is null');
 			return;
 		}
 		const windowWidth = window.innerWidth;
-		const windowHeight = window.innerHeight;
+		// const windowHeight = window.innerHeight;
 
-		const deviceWidth = screen.width;
-		const deviceHeight = screen.height;
+		// const deviceWidth = screen.width;
+		// const deviceHeight = screen.height;
 
 		iconSize =
 			windowWidth >= 3800

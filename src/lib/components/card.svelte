@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { cardsStatus } from '../../stores/cardstatus';
-	import type { Mouse } from '@playwright/test';
 	let cardRef: HTMLElement | null = null;
 	export let topInitOffset: string;
 	export let leftInitOffset: string;
@@ -91,12 +90,14 @@
 			console.error('cardRef is null');
 			return false;
 		}
+
 		cardRef.draggable = true;
 		event.preventDefault();
 
 		// Initial mouse position
-		if (typeof event === typeof TouchEvent) {
+		if (event instanceof TouchEvent) {
 			const touchEvent = event as TouchEvent;
+			console.log('touchEvent:', touchEvent.touches[0].clientX, touchEvent.touches[0].clientY);
 			initialMouseDownX = touchEvent.touches[0].clientX;
 			initialMouseDownY = touchEvent.touches[0].clientY;
 		} else {
@@ -108,6 +109,9 @@
 		// Initial element position
 		initialLeft = cardRef.offsetLeft;
 		initialTop = cardRef.offsetTop;
+
+		console.log('initialLeft:', initialLeft, 'initialTop:', initialTop);
+		console.log('initialMouseDownX:', initialMouseDownX, 'initialMouseDownY:', initialMouseDownY);
 
 		return true;
 	}
@@ -121,6 +125,7 @@
 
 		// prepare drag and drop for laptop
 		cardRef.addEventListener('mousedown', (event) => {
+			console.log('mousedown');
 			if (!handleDragStart(event)) {
 				return;
 			}
@@ -132,6 +137,7 @@
 
 		// prepare drag and drop for mobile
 		cardRef.addEventListener('touchstart', (event) => {
+			console.log('touchstart');
 			if (!handleDragStart(event)) {
 				return;
 			}
@@ -152,7 +158,7 @@
 		let newX: number;
 		let newY: number;
 		// Calculate new position
-		if (typeof event === typeof TouchEvent) {
+		if (event instanceof TouchEvent) {
 			const touchEvent = event as TouchEvent;
 			newX = initialLeft + touchEvent.touches[0].clientX - initialMouseDownX;
 			newY = initialTop + touchEvent.touches[0].clientY - initialMouseDownY;
@@ -174,7 +180,7 @@
 		}
 		cardRef.draggable = false;
 		// Remove event listeners
-		if (typeof event === typeof TouchEvent) {
+		if (event instanceof TouchEvent) {
 			cardRef.removeEventListener('touchmove', moveElement);
 			cardRef.removeEventListener('touchend', stopMoving);
 		} else {

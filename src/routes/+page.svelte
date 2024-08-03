@@ -48,7 +48,7 @@
 	<Card
 		index="5"
 		topFinalOffset="-1"
-		leftFinalOffset="1"
+		leftFinalOffset="0.5"
 		topInitOffset="-4"
 		leftInitOffset="-10"
 		bg="bg-blue-950"
@@ -57,7 +57,7 @@
 	<Card
 		index="4"
 		topFinalOffset="-0.75"
-		leftFinalOffset="0.75"
+		leftFinalOffset="0.25"
 		topInitOffset="-7"
 		leftInitOffset="12"
 		bg="bg-blue-900"
@@ -65,7 +65,7 @@
 	<Card
 		index="3"
 		topFinalOffset="-0.5"
-		leftFinalOffset="0.5"
+		leftFinalOffset="0"
 		topInitOffset="4"
 		leftInitOffset="-13"
 		bg="bg-blue-800"
@@ -73,7 +73,7 @@
 	<Card
 		index="2"
 		topFinalOffset="-0.25"
-		leftFinalOffset="0.25"
+		leftFinalOffset="-0.25"
 		topInitOffset="1"
 		leftInitOffset="9"
 		bg="bg-blue-700"
@@ -81,7 +81,7 @@
 	<Card
 		index="1"
 		topFinalOffset="0"
-		leftFinalOffset="0"
+		leftFinalOffset="-0.5"
 		topInitOffset="-2"
 		leftInitOffset="0"
 		bg="bg-blue-600"
