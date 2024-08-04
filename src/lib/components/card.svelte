@@ -275,8 +275,8 @@
 		style="
 		width:{`${Math.floor(cardWidth * 0.1)}px`};
 		height:{`${Math.floor(cardWidth * 0.07)}px`};
-		left: {`${Math.floor(cardWidth * 0.08)}px`};
-		bottom: {`${Math.floor(cardWidth * 0.1)}px`}"
+		left: {`${Math.floor(cardWidth * 0.06)}px`};
+		bottom: {`${Math.floor(cardWidth * 0.05)}px`}"
 	>
 		<div
 			class="index relative rotate-[39deg] transform font-bold text-black"
@@ -293,7 +293,7 @@
 		class="drag-sign absolute italic text-white"
 		style="font-size: {`${Math.floor(cardWidth * 0.04)}px`};
 			right: {`${Math.floor(cardWidth * 0.08)}px`};
-			bottom: {`${Math.floor(cardWidth * 0.1)}px`};"
+			bottom: {`${Math.floor(cardWidth * 0.07)}px`};"
 	>
 		{#if link === ''}
 			Drag⟶
