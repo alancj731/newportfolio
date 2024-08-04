@@ -12,7 +12,7 @@
 				? '        Code never lies,\ncomments sometimes do.'
 				: 'Code never lies, comments sometimes do.';
 
-			fontSize = smallDisplay ? '5vw' : '2vw';
+			fontSize = smallDisplay ? '5vw' : '1.5vw';
 
 			topPos = smallDisplay ? '2%' : '3%';
 		} catch (error) {
