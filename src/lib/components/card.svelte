@@ -216,9 +216,6 @@
 		if (linkRef) {
 			linkRef.addEventListener('touchstart', (event) => {
 				// since default behavior is disabled, we need to handle it manually
-				if (link === 'mailto:alanchenjian@gmail.com') {
-					window.location.href = link;
-				}
 				window.open(link, '_blank');
 			});
 		}
