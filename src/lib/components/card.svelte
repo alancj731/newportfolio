@@ -216,13 +216,12 @@
 		if (linkRef) {
 			linkRef.addEventListener('touchstart', (event) => {
 				// since default behavior is disabled, we need to handle it manually
-				if (link === '') {
-					return;
+				if (link === 'mailto:alanchenjian@gmail.com') {
+					window.location.href = link;
 				}
 				window.open(link, '_blank');
 			});
 		}
-
 
 		const unsubscribindexRanking = indexRanking.subscribe((value) => {
 			if (!cardRef) {
@@ -257,10 +256,10 @@
 		</div>
 	{/if}
 	{#if image !== ''}
-		<div class="image-containe flex w-full justify-center items-center">
+		<div class="image-containe flex w-full items-center justify-center">
 			<!-- svelte-ignore a11y-img-redundant-alt -->
 			<img
-				class="app-image rounded-xl relative bg-transparent overflow-hidden"
+				class="app-image relative overflow-hidden rounded-xl bg-transparent"
 				src={image}
 				alt="image"
 				style="top: {`${Math.floor(cardWidth * 0.13)}px`};
@@ -295,15 +294,36 @@
 			right: {`${Math.floor(cardWidth * 0.08)}px`};
 			bottom: {`${Math.floor(cardWidth * 0.07)}px`};"
 	>
-		{#if link === ''}
-			Drag⟶
+		{#if link === 'mailto:alanchenjian@gmail.com'}
+			<a id="email" href={link}></a>
 		{:else}
-			<a href={link} target="_blank">Visit⟶</a>
+			<a href={link} target="_blank">Visit ⟶</a>
 		{/if}
 	</div>
 </div>
 
 <style>
+	#email {
+		display: inline-block;
+		transition: 0.5s linear;
+	}
+	#email:hover {
+		color: black;
+		/* scale: 1.2; */
+		font: bold;
+		transition: 0.8s linear;
+	}
+	#email::after {
+		content: 'Contact Me ⟶';
+	}
+	#email:hover::after {
+		content: 'alanchenjian@gmail.com';
+		position: absolute;
+		top: 0;
+		right: 0;
+		/* transition: 0.5s linear; */
+	}
+
 	.ellipsis {
 		position: absolute;
 		/* background-color: #073169; */

@@ -94,7 +94,7 @@
 		leftFinalOffset="-0.5"
 		topInitOffset="-2"
 		leftInitOffset="0"
-		link=""
+		link='mailto:alanchenjian@gmail.com'
 		bg="bg-blue-600"
 	>
 		<Changingtext />
