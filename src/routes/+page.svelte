@@ -43,14 +43,14 @@
 	<Backgroundtext />
 
 	<Card
-		title="JWT Demo"
-		image="/imgs/jwttoken.gif"
-		index="4"
+		title="Chat Bot"
+		image="/imgs/chatbot.png"
+		index="1"
 		topFinalOffset="-1"
 		leftFinalOffset="0.5"
 		topInitOffset="-4"
 		leftInitOffset="-10"
-		link="https://jwttokendemo.vercel.app/"
+		link="https://chat.winnipegdatafan.com/"
 		bg="bg-blue-950"
 	></Card>
 	<Card
@@ -78,7 +78,7 @@
 	<Card
 		title="Tetris"
 		image="/imgs/tetris.gif"
-		index="1"
+		index="4"
 		topFinalOffset="-0.25"
 		leftFinalOffset="-0.25"
 		topInitOffset="1"
