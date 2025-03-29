@@ -57,23 +57,13 @@
 		title="Bubble Sort"
 		image="/imgs/bubble.gif"
 		index="3"
-		topFinalOffset="-0.75"
-		leftFinalOffset="0.25"
-		topInitOffset="-7"
-		leftInitOffset="12"
-		link="https://sorting-ten.vercel.app"
-		bg="bg-blue-900"
-	/>
-	<Card
-		title="Animation Demo"
-		image="/imgs/animation.gif"
-		index="2"
+		
 		topFinalOffset="-0.5"
 		leftFinalOffset="0"
 		topInitOffset="4"
 		leftInitOffset="-13"
-		link="https://animation-three-umber.vercel.app/"
-		bg="bg-blue-800"
+		link="https://sorting-ten.vercel.app"
+		bg="bg-blue-900"
 	/>
 	<Card
 		title="Tetris"
@@ -86,6 +76,18 @@
 		link="https://tetris-js-nine-psi.vercel.app/"
 		bg="bg-blue-700"
 	/>
+	<Card
+		title="311 Waiting Time"
+		image="/imgs/311call.png"
+		index="2"
+		topFinalOffset="-0.75"
+		leftFinalOffset="0.25"
+		topInitOffset="-7"
+		leftInitOffset="12"
+		link="https://311.winnipegdatafan.com/"
+		bg="bg-blue-800"
+	/>
+	
 	<Card
 		title=""
 		image=""
